@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<extentreports>
+	<configuration>
+		<theme>standard</theme>
+		<encoding>UTF-8</encoding>
+		<protocol>https</protocol>
+		<documentTitle>IRINA ORBAN "https://www.felicitystore.ro/" TEST REPORT</documentTitle>
+		<reportName>IRINA ORBAN "https://www.felicitystore.ro/" REPORT</reportName>
+		<reportHeadline>IRINA ORBAN "https://www.felicitystore.ro/"</reportHeadline>
+		<dateFormat>yyyy-MM-dd</dateFormat>
+		<timeFormat>HH:mm:ss</timeFormat>
+		<script>
+			<![CDATA[$(document).ready(function() { });]]>
+		</script>
+		<styles>
+			<![CDATA[]]>
+		</styles>
+	</configuration>
+</extentreports>
+

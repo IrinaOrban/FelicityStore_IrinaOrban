@@ -1,0 +1,2 @@
+﻿email,emailErr,password,passwordErr,confirmPassword,confirmPasswordErr,name,nameErr,phone,phoneErr,countyOptionIndex,countyErr,localityOptionIndex,localityErr,street,streetErr,acceptTerms,acceptTermsErr
+ ,Introduceti adresa de e-mail!, ,Introduceti parola!, ,Confirmati parola!, ,Introduceti numele!, ,Introduceti nr. de telefon!,0,Selectati judetul!,0,Selectati localitatea!, ,Introduceti strada!,true,
