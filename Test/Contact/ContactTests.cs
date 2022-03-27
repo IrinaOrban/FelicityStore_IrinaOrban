@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace FelicityStore_IrinaOrban.Test
+namespace FelicityStore_IrinaOrban.Test.Contact
 {
     class ContactTests:BaseTest
     {
@@ -23,7 +23,7 @@ namespace FelicityStore_IrinaOrban.Test
 
         public void Contact(string name, string nameErr,string email, string emailErr, string phone, string phoneErr, string message, string messageErr)
         {
-            _driver.Navigate().GoToUrl(url + "/contacteaza-ne");
+            _driver.Navigate().GoToUrl(url + contactUrlPath);
             String contextName = TestContext.CurrentContext.Test.Name;
             _test = _extent.CreateTest(contextName);
             var contactPage = new ContactPage(_driver);

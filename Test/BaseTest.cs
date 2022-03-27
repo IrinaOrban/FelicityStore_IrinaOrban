@@ -19,17 +19,25 @@ namespace FelicityStore_IrinaOrban.Test
         public static ExtentReports _extent;
         public ExtentTest _test;
         public string testName;
+        protected string loginUrlPath = "/login";
+        protected string registrationUrlPath = "/inregistrare";
+        protected string contactUrlPath = "/contacteaza-ne";
+        protected string returnProductsUrlPath = "/returnare-produse";
+        protected string searchProductsUrlPath = "/rezultate-cautare";
+        protected string forgotPasswordUrlPath = "/recuperare-parola";
+        protected string productsUrlPath = "/bijuterii-inspirate-de-natura";
+        protected string myBasket = "/cos-de-cumparaturi";
 
         [OneTimeSetUp]
-        protected void ExtentStart()
+        protected static void ExtentStart()
         {
             var path = System.Reflection.Assembly.GetCallingAssembly().CodeBase;//path to the location of the test that are running
             var actualPath = path.Substring(0, path.LastIndexOf("bin"));//get bin folder
             var projectPath = new Uri(actualPath).LocalPath;
             Directory.CreateDirectory(projectPath.ToString() + "Reports");//creates folder
             DateTime time = DateTime.Now;
-            var reportPath = projectPath + "Reports\\report_" + time.ToString("h_mn_ss") + ".html";
-            var htmlReporter = new ExtentHtmlReporter(reportPath);
+            var reportPath = projectPath + "Reports\\report_" + time.ToString("yyyy-MM-dd-HH_mm_ss") + ".html";
+            var htmlReporter = new ExtentV3HtmlReporter(reportPath);
             _extent = new ExtentReports();
             _extent.AttachReporter(htmlReporter);
             _extent.AddSystemInfo("Host Name", "Localhost");

@@ -1,2 +1,10 @@
 ﻿name,nameErr,email,emailErr,phone,phoneErr,message,messageErr
  ,Introduceti numele!, ,Introduceti adresa de e-mail!, ,Introduceti nr. de telefon corect!, ,Introduceti subiectul mesajului!
+NumeMesaj, , ,Introduceti adresa de e-mail!,1234567890, , ,Introduceti subiectul mesajului!
+NumeMesaj, ,aa,Introduceti o adresa de e-mail corecta!,1234567890, , ,Introduceti subiectul mesajului!
+NumeMesaj, ,numemesaj@domeniu.com, , ,Introduceti nr. de telefon corect!, ,Introduceti subiectul mesajului!
+NumeMesaj, ,numemesaj@domeniu.com, ,aaaa,Introduceti nr. de telefon corect!, ,Introduceti subiectul mesajului!
+NumeMesaj, ,numemesaj@domeniu.com, ,1,Introduceti nr. de telefon corect!, ,Introduceti subiectul mesajului!
+NumeMesaj, ,numemesaj@domeniu.com, ,123456789,Introduceti nr. de telefon corect!, ,Introduceti subiectul mesajului!
+NumeMesaj, ,numemesaj@domeniu.com, ,1234567890, ,Mesaj introdus, 
+NumeMesaj, ,numemesaj@domeniu.com, ,1234567890, ,dbywytkbsbsazwayoxqdxnhpylsiyikdztxwvpctwmysfwbdtsxvgwalptipfjvzjlberkfqbqxvhqzqaombeseulwynjthqnscwhawhklrnnrdfoadidtvplnprgbhoqpnxufnemzssjbwsfctnvndolovpmpqoovvvvv, 

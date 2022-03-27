@@ -1,2 +1,14 @@
 ﻿email,emailErr,password,passwordErr,confirmPassword,confirmPasswordErr,name,nameErr,phone,phoneErr,countyOptionIndex,countyErr,localityOptionIndex,localityErr,street,streetErr,acceptTerms,acceptTermsErr
- ,Introduceti adresa de e-mail!, ,Introduceti parola!, ,Confirmati parola!, ,Introduceti numele!, ,Introduceti nr. de telefon!,0,Selectati judetul!,0,Selectati localitatea!, ,Introduceti strada!,true,
+ ,Introduceti adresa de e-mail!, ,Introduceti parola!, ,Confirmati parola!, ,Introduceti numele!, ,Introduceti nr. de telefon!,0,Selectati judetul!,0,Selectati localitatea!, ,Introduceti strada!,TRUE,
+ ,Introduceti adresa de e-mail!,aaa, ,aaa, ,Persoana fizica, ,1234567890, ,2, ,1, ,Adresa, ,TRUE,
+aa,Introduceti o adresa de e-mail corecta!,aaa, ,aaa, ,Persoana fizica, ,1234567890, ,2, ,1, ,Adresa, ,TRUE,
+persoana@persoana.com, ,aaa, , ,Confirmati parola!,Persoana fizica, ,1234567890, ,2, ,1, ,Adresa, ,TRUE,
+persoana@persoana.com, ,aaa, ,aa,Parolele nu se potrivesc!,Persoana fizica, ,1234567890, ,2, ,1, ,Adresa, ,TRUE,
+persoana@persoana.com, ,passpersoana, ,passpersoana,, ,Introduceti numele!,1234567890, ,2, ,1, ,Adresa, ,TRUE,
+persoana@persoana.com, ,passpersoana, ,passpersoana, ,Persoana fizica, ,a,Numarul de telefon contine minim 10 cifre!,2, ,2, ,Adresa, ,TRUE,
+persoana@persoana.com, ,passpersoana, ,passpersoana, ,Persoana fizica, ,abcdefghij,Numarul de telefon contine minim 10 cifre!,2, ,2, ,Adresa, ,TRUE,
+persoana@persoana.com, ,passpersoana, ,passpersoana, ,Persoana fizica, ,123456789,Numarul de telefon contine minim 10 cifre!,2, ,2, ,Adresa, ,TRUE,
+persoana@persoana.com, ,passpersoana, ,passpersoana, ,Persoana fizica, ,1234567890, ,0,Selectati judetul!,2, ,Adresa, ,TRUE,
+persoana@persoana.com, ,passpersoana, ,passpersoana, ,Persoana fizica, ,1234567890, ,2, ,0,Selectati localitatea!,Adresa, ,TRUE,
+persoana@persoana.com, ,passpersoana, ,passpersoana, ,Persoana fizica, ,1234567890, ,2, ,1, , ,Introduceti strada!,TRUE,
+persoana@persoana.com, ,passpersoana, ,passpersoana, ,Persoana fizica, ,1234567890, ,2, ,1, ,Adresa, ,FALSE,Trebuie sa accepti termenii si conditiile

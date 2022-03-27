@@ -7,14 +7,14 @@ using System.Collections.Generic;
 using System.Text;
 using FelicityStore_IrinaOrban.POM;
 
-namespace FelicityStore_IrinaOrban.Test
+namespace FelicityStore_IrinaOrban.Test.Main
 {
     class LandingPageTests : BaseTest
     {
         string url = FrameworkConstants.GetUrl();
 
-        [Test, Category("StaticLinksNavigation"), Order(1)]
-        public void LandingPage1()
+        [Test, Category("Main"), Category("Functionality"), Order(1)]
+        public void LandingPageHeadderLinks()
         {
             _driver.Navigate().GoToUrl(url);
             String contextName = TestContext.CurrentContext.Test.Name;
@@ -24,9 +24,8 @@ namespace FelicityStore_IrinaOrban.Test
             Assert.IsFalse(landingPage.CheckHeaderLinks());
            
         }
-
-        [Test, Category("StaticLinksNavigation"), Order(2)]
-        public void LandingPage2()
+        [Test, Category("Main"), Category("Usability"), Order(2)]
+        public void LandingPageFooterLinks()
         {
             _driver.Navigate().GoToUrl(url);
             String contextName = TestContext.CurrentContext.Test.Name;
@@ -44,8 +43,8 @@ namespace FelicityStore_IrinaOrban.Test
             }
         }
 
-        [Test, TestCaseSource("GetDynamicLinksDataCSV"), Category("DynamicLinks"), Order(3)]
-        public void LandingPage3(string linkName)
+        [Test, Category("Main"), Category("Usability"), TestCaseSource("GetDynamicLinksDataCSV"),  Order(3)]
+        public void LandingPageProductsLinks(string linkName)
         {
             _driver.Navigate().GoToUrl(url);
             String contextName = TestContext.CurrentContext.Test.Name;
@@ -53,11 +52,10 @@ namespace FelicityStore_IrinaOrban.Test
             LandingPage landingPage = new LandingPage(_driver);
             landingPage.AcceptCookies();
             Assert.IsFalse(landingPage.CheckDynamicLinks(linkName));
-            
 
         }
 
-        [Test, Category("DynamicLinks"), Order(3)]
+        [Test, Category("Main"),Category("Usability"), Order(4)]
         public void LandingPageCarusel()
         {
             _driver.Navigate().GoToUrl(url);
@@ -68,6 +66,19 @@ namespace FelicityStore_IrinaOrban.Test
             Assert.IsFalse(landingPage.CheckCaruselBijuteriiRecomandate());
             
 
+        }
+
+        [Test, Category("Main"),Category("Usability"), Order(5)]
+        public void LandingPageCaruselProducts()
+        {
+            _driver.Navigate().GoToUrl(url);
+            String contextName = TestContext.CurrentContext.Test.Name;
+            _test = _extent.CreateTest(contextName);
+            LandingPage landingPage = new LandingPage(_driver);
+            landingPage.AcceptCookies();
+            var i = new Random();
+            Assert.IsFalse(landingPage.CheckCaruselProductLinks(i.Next(6)));
+            
         }
     }
 }

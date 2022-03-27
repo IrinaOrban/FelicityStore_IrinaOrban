@@ -19,12 +19,41 @@ namespace FelicityStore_IrinaOrban
     public class MyUtils
     {
 
-        public static IWebElement WaitForElement(IWebDriver driver, int seconds, By locator)
+        public static IWebElement WaitForElementClick(IWebDriver driver, int seconds, By locator)
         {
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(seconds));
             return wait.Until(ExpectedConditions.ElementToBeClickable(locator));
         }
+        public static IWebElement WaitForElementVisible(IWebDriver driver, int seconds, By locator)
+        {
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(seconds));
+            return wait.Until(ExpectedConditions.ElementIsVisible(locator));
+        }
+        public static bool IsElementPresent(IWebDriver driver, By locator)
+        {
+            try
+            {
+                driver.FindElement(locator);
+                return true;
+            }
+            catch (NoSuchElementException)
+            {
+                return false;
+            }
+        }
+        public static bool TryClick(IWebElement element)
+        {
+            try
+            {
+                element.Click();
 
+                return true;
+            }
+            catch (ElementNotInteractableException)
+            {
+                return false;
+            }
+        }
         public static IWebElement WaitForFluentElement(IWebDriver driver, int seconds, By locator)
         {
             DefaultWait<IWebDriver> fluentWait = new DefaultWait<IWebDriver>(driver)
@@ -36,7 +65,6 @@ namespace FelicityStore_IrinaOrban
             fluentWait.IgnoreExceptionTypes(typeof(NoSuchElementException));
             return fluentWait.Until(x => x.FindElement(locator));
         }
-
         public static void PrintCookies(ICookieJar cookies)
         {
             foreach (Cookie c in cookies.AllCookies)
@@ -44,14 +72,6 @@ namespace FelicityStore_IrinaOrban
                 Console.WriteLine("Cookie name {0} - cookie value {1}", c.Name, c.Value);
             }
         }
-
-        /// <summary>
-        /// The method creates a screenshot based on the current date and saves it into a folder defined by the tester
-        /// </summary>
-        /// <param name="driver">The Webedriver instance/ browser from which will be taken></param>
-        /// <param name="path">The path were the file will be saved </param>
-        /// <param name="fileName">The bsee file name that will append the current data </param>
-        /// <param name="format">The file format type example png</param>
         public static void TakeScreenshotWithDate(IWebDriver driver, string path, string fileName, ScreenshotImageFormat format)
         {
             DirectoryInfo validation = new DirectoryInfo(path);
@@ -63,13 +83,11 @@ namespace FelicityStore_IrinaOrban
             string finalFilePath = String.Format("{0}\\{1}_{2}.{3}", path, fileName, currentDate, format);
             ((ITakesScreenshot)driver).GetScreenshot().SaveAsFile(finalFilePath, format);
         }
-
         public static MediaEntityModelProvider CaptureScreenShot(IWebDriver driver, string name)
         {
             var screenShot = ((ITakesScreenshot)driver).GetScreenshot().AsBase64EncodedString;
             return MediaEntityBuilder.CreateScreenCaptureFromBase64String(screenShot, name).Build();
         }
-
         public static void ExecuteJSScript(IWebDriver driver, string script)
         {
             var jsExecutor = (IJavaScriptExecutor)driver;
@@ -79,12 +97,6 @@ namespace FelicityStore_IrinaOrban
                 Console.WriteLine(result.ToString());
             }
         }
-
-        /// <summary>
-        /// Converts a config file that has lines like=key=value into a dictonary with key and value
-        /// </summary>
-        /// <param name="confiFilePath">The path of the config file</param>
-        /// <returns>A dictonary with a key value pair of tye string and sting representing the lines in the config file</returns>
         public static Dictionary<string,string> ReadConfig(string confiFilePath)
         {
             var configData = new Dictionary<string, string>();
@@ -97,14 +109,12 @@ namespace FelicityStore_IrinaOrban
             }
             return configData;
         }
-
         public static string[][] GetGenericData(string path)
         {
             var lines = File.ReadAllLines(path).Select(a => a.Split(',')).Skip(1);
             return lines.ToArray();
            
         }
-
         public static DataTable GetDataTableFromCsv(string csv)
         {
             DataTable dataTable = new DataTable();
@@ -137,7 +147,6 @@ namespace FelicityStore_IrinaOrban
             }
             return dataTable;
         }
-
         public static DataTable GetDataTableFromExcel(string excelPath )
 
         {
@@ -204,13 +213,11 @@ namespace FelicityStore_IrinaOrban
                 return dataTable;
 
         }
-
         public static T JsonRead<T>(string jsonFile)
         {
             string text = File.ReadAllText(jsonFile);
             return JsonSerializer.Deserialize<T>(text);
         }
-
         public static List<string> GetAllFilesInFolderExt(string path, string extension)
         {
             List<string> files = new List<string>();
@@ -221,7 +228,6 @@ namespace FelicityStore_IrinaOrban
             }
             return files;
         }
-
         public static string Encrypt(string source, string key)
         {
             using (TripleDESCryptoServiceProvider tripleDESCryptoService = new TripleDESCryptoServiceProvider())
@@ -236,7 +242,6 @@ namespace FelicityStore_IrinaOrban
                 }
             }
         }
-
         public static string Decrypt(string encrypt, string key)
         {
             using (TripleDESCryptoServiceProvider tripleDESCryptoService = new TripleDESCryptoServiceProvider())
@@ -251,7 +256,6 @@ namespace FelicityStore_IrinaOrban
                 }
             }
         }
-        
         public static bool CheckLinkNavigation(IWebElement element, IWebDriver driver, string elementHref)
         {
             driver.SwitchTo().Window(driver.WindowHandles.First());
@@ -279,5 +283,64 @@ namespace FelicityStore_IrinaOrban
             }
             return hasError;
         }
+        public static string ConvertDictionaryToQuery(Dictionary<string, string> queryParams)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (string key in queryParams.Keys)
+            {
+                sb.Append(String.Format("&{0}={1}", key, queryParams[key]));
+            }
+            return sb.ToString();
+        }
+        public static List<Dictionary<string, string>> ConvertCsvToDictionary(string filePath)
+        {
+            var lines = File.ReadAllLines(filePath).Select(a => a.Split(','));
+            List<Dictionary<string, string>> dictionaryList = new List<Dictionary<string, string>>();
+            string[] header = lines.ElementAt(0).ToArray();
+            for (int i = 1; i < lines.Count(); i++)
+            {
+                var currentValues = lines.ElementAt(i).ToArray();
+                Dictionary<string, string> queryParams = new Dictionary<string, string>();
+                for (int j = 0; j < currentValues.Count(); j++)
+                {
+                    queryParams.Add(header[j], currentValues[j]);
+                }
+                dictionaryList.Add(queryParams);
+            }
+            return dictionaryList;
+        }
+        public static string GenerateRandomStringCount(int count)
+        {
+            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            var stringChars = new char[count];
+            var random = new Random();
+
+            for (int i = 0; i < count; i++)
+            {
+                stringChars[i] = chars[random.Next(chars.Length)];
+            }
+
+            var finalString = new String(stringChars);
+            
+            return finalString;
+
+        }
+        public static string GenerateRandomStringOfNumbersCount(int count)
+        {
+            var chars = "0123456789";
+            var stringChars = new char[count];
+            var random = new Random();
+
+            for (int i = 0; i < count; i++)
+            {
+                stringChars[i] = chars[random.Next(chars.Length)];
+            }
+
+            var finalString = new String(stringChars);
+
+            return finalString;
+
+        }
+
     }
 }

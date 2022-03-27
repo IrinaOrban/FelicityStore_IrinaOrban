@@ -8,9 +8,9 @@ using FelicityStore_IrinaOrban.POM;
 using FelicityStore_IrinaOrban.Utilities;
 using FelicityStore_IrinaOrban.Test;
 
-namespace FelicityStore_IrinaOrban.Test
+namespace FelicityStore_IrinaOrban.Test.Authentication
 {
-    class AuthTest: BaseTest
+    class BasicAuth: BaseTest
     {
 
         string url = FrameworkConstants.GetUrl();
@@ -24,41 +24,32 @@ namespace FelicityStore_IrinaOrban.Test
             }
         }
 
-        [Test, Category("AuthTest"), TestCaseSource("GetCredentialsDataCsv")]
-        public void BasicAuth(string username, string password, string usernameError, string passwordError, string loginError)
+        [Test, Category("AuthTest"), Category("Negative"), Category("Functionality"),TestCaseSource("GetCredentialsDataCsv"),Order(1)]
+        public void BasicLogin(string username, string password, string usernameError, string passwordError, string loginError)
         {
-            _driver.Navigate().GoToUrl(url + "/login");
+            _driver.Navigate().GoToUrl(url + loginUrlPath);
             String contextName = TestContext.CurrentContext.Test.Name;
             _test = _extent.CreateTest(contextName);
-            LoginPage loginPage = new LoginPage(_driver);
+            var loginPage = new LoginPage(_driver);
             loginPage.AcceptCookies();
             Assert.AreEqual("Sunt deja client", loginPage.CheckAuthPage());
             var errors = loginPage.Login(username, password);
             Assert.AreEqual(usernameError, errors["usernameError"]);
             Assert.AreEqual(passwordError, errors["passwordError"]);
             Assert.AreEqual(loginError, errors["loginError"]);
-           
 
         }
-        private static IEnumerable<TestCaseData> GetUserDataCsv()
+
+        [Test, Category("AuthTest"), Category("Negative"), Order(1)]
+        public void ModalLogin()
         {
-            var csvData = MyUtils.GetDataTableFromCsv("TestData\\userCredential.csv");
-            for (int i = 0; i < csvData.Rows.Count; i++)
-            {
-                yield return new TestCaseData(csvData.Rows[i].ItemArray);
-            }
-        }
-        [Test, Category("AuthTest"), TestCaseSource("GetUserDataCsv")]
-        public void UserAuth(string username, string password)
-        {
-            _driver.Navigate().GoToUrl(url + "/login");
-            LoginPage lp = new LoginPage(_driver);
-            Assert.AreEqual("Sunt deja client", lp.CheckAuthPage());
-            var login = lp.UserLogin(username, password);
-           Assert.AreEqual("https://www.felicitystore.ro/contul-meu?login=1", login);
             String contextName = TestContext.CurrentContext.Test.Name;
             _test = _extent.CreateTest(contextName);
-
+            _driver.Navigate().GoToUrl(url);
+            var landingPage = new LandingPage(_driver);
+            landingPage.AcceptCookies();
+            var errors = landingPage.LandingPageLogin(MyUtils.GenerateRandomStringCount(5), MyUtils.GenerateRandomStringCount(5));
+            Assert.AreEqual("Incercati din nou!",errors);
         }
     }
 }

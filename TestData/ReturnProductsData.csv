@@ -1,0 +1,12 @@
+﻿orderNumber,orderNumberErr,hasOrederNumberValidationErr,name,nameErr,returnTypeOptionIndex,returnTypeErr,productCode,productCodeErr,adress,adressErr,phone,phoneErr,email,emailErr,message,messageErr
+ ,Introduceti numarul comenzii!,FALSE, ,Introduceti numele!,0,Selectati tipul de retur!, ,Trebuie sa introduceti un numar !, ,Introduceti Adresa!, ,Introduceti numarul de telefon!, ,Introduceti adresa de e-mail!, , 
+aaa,Trebuie sa introduceti un numar !,TRUE,Nume Retur, ,3, ,11, ,Adresa, ,1234567890, ,nume@domeniu.com, ,mesaj, 
+111,Introduceti numarul comenzii!,FALSE, ,Introduceti numele!,3, ,11, ,Adresa, ,1234567890, ,nume@domeniu.com, ,mesaj, 
+111, ,FALSE,Nume Retur, ,0,Selectati tipul de retur!,11,,Adresa, ,1234567890, ,nume@domeniu.com, ,mesaj, 
+111, ,FALSE,Nume Retur, ,3,,,Trebuie sa introduceti un numar !,Adresa, ,1234567890, ,nume@domeniu.com, ,mesaj, 
+111, ,FALSE,NumeRetur, ,3, ,11, ,,Introduceti Adresa!,1234567890,,nume@domeniu.com, ,mesaj, 
+111, ,FALSE,NumeRetur, ,3, ,11, ,Adresa, ,,Introduceti numarul de telefon!,nume@domeniu.com, ,mesaj, 
+111, ,FALSE,NumeRetur, ,3, ,11, ,Adresa, ,a,Introduceti nr. de telefon corect!,nume@domeniu.com, ,mesaj, 
+111, ,FALSE,NumeRetur, ,3, ,11, ,Adresa, ,123456789,Introduceti nr. de telefon corect!,nume@domeniu.com, ,mesaj, 
+111, ,FALSE,NumeRetur, ,3, ,11, ,Adresa, ,1234567890, ,@.com,Introduceti o adresa de e-mail corecta!,mesaj, 
+111, ,FALSE,NumeRetur, ,3, ,11, ,Adresa, ,1234567890, ,nume@domeniu.com, ,dbywytkbsbsazwayoxqdxnhpylsiyikdztxwvpctwmysfwbdtsxvgwalptipfjvzjlberkfqbqxvhqzqaombeseulwynjthqnscwhawhklrnnrdfoadidtvplnprgbhoqpnxufnemzssjbwsfctnvndolovpmpqoovvvvv,
