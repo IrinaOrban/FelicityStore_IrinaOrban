@@ -5,9 +5,10 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace FelicityStore_IrinaOrban.Test.Shopping
+namespace FelicityStore_IrinaOrban.Test.Wishlist
+
 {
-    class Shopping:BaseTest
+    class Wishlist:BaseTest
     {
         string url = FrameworkConstants.GetUrl();
 
@@ -20,8 +21,8 @@ namespace FelicityStore_IrinaOrban.Test.Shopping
             }
         }
 
-        [Test, Category("Shopping"),Category("Functionality"), Category("Smoke"),TestCaseSource("GetUserDataCsv")]
-        public void UserShopping(string username, string password)
+        [Test, Category("Wishlist"),Category("Functionality"), TestCaseSource("GetUserDataCsv")]
+        public void WishlistHanling(string username, string password)
         {
             String contextName = TestContext.CurrentContext.Test.Name;
             _test = _extent.CreateTest(contextName);
@@ -30,14 +31,11 @@ namespace FelicityStore_IrinaOrban.Test.Shopping
             productsPage.AcceptCookies();
             productsPage.ProductsPageUserLogin(username, password);
             var i = new Random().Next(5);
-            Assert.AreEqual(2,productsPage.AddToBasket(2));
-            productsPage.GoToMyBasket();
-            var basketPage = new MyBasketPage(_driver);
-            Assert.AreEqual(basketPage.NumberOfProductsInBasket()+1, basketPage.IncreaseProductsToBasket());
-            Assert.IsTrue(basketPage.HasDeleteProductsErrors());
-            Assert.AreEqual("Selectati metoda de plata!", basketPage.CheckOutNegative());
-            var myAccount = new MyAccountPage(_driver);
-            myAccount.Logout();
+            Assert.AreEqual(i, productsPage.AddToWishlist(i));
+            productsPage.GoToMyWishList();
+            var wishlistPage = new MyWishlistPage(_driver);
+            Assert.IsFalse(wishlistPage.HasDeletewhislistError());
+
         }
 
     }

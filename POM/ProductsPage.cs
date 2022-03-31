@@ -45,11 +45,12 @@ namespace FelicityStore_IrinaOrban.POM
             var productCards = driver.FindElements(By.ClassName(allProductsSelector));
             var outOfstockNumber = 0;
             int addToBasketNumber = 0;
-            Console.WriteLine(productCards.Count);
+            var numberOfProductsExistingInBasket = int.Parse(MyUtils.WaitForElementClick(driver,10,By.Id(numberOfProductsInBasketSelector)).Text);
+           
+
             if (numberOfProductsToBuy < productCards.Count)
             {
                  addToBasketNumber = numberOfProductsToBuy;
-
             }
             else
             {
@@ -65,7 +66,7 @@ namespace FelicityStore_IrinaOrban.POM
                     buttonsContainer.FindElement(By.ClassName(productOutOfStockSelector));
                     var linkToProducDetails = productCard.FindElement(By.TagName("a"));
                     Console.WriteLine("The product {0} is out of stock", linkToProducDetails.GetAttribute("href"));
-                     outOfstockNumber =1;
+                     outOfstockNumber =outOfstockNumber++;
                 }
                 catch (NoSuchElementException)
                 {
@@ -73,17 +74,19 @@ namespace FelicityStore_IrinaOrban.POM
                     addToCartBtn.Submit();
                 }
             }
-             return int.Parse(driver.FindElement(By.Id(numberOfProductsInBasketSelector)).Text)-outOfstockNumber;
+            var numberOfProductsInBasket = MyUtils.WaitForElementClick(driver, 10, By.Id(numberOfProductsInBasketSelector)).Text;
+            Console.WriteLine("Au fost {0} produse in cos, a trebuit sa cumpar {1}, dintre acestea {2} nu erau in stoc, acum am {3} produse in cos",numberOfProductsExistingInBasket,numberOfProductsToBuy,outOfstockNumber,numberOfProductsInBasket);
+             return int.Parse(numberOfProductsInBasket)+outOfstockNumber-numberOfProductsExistingInBasket;
         }
 
-        public string AddToWishlist(int numberOfWishedProducts)
+        public int AddToWishlist(int numberOfWishedProducts)
         {
             var productCards = driver.FindElements(By.ClassName(allProductsSelector));
             int addToWishlisttNumber = 0;
+            int numberOfProductsExistingInWishlist = int.Parse(driver.FindElement(By.Id(numberOfProductInWishlistSelector)).Text);
             if (numberOfWishedProducts < productCards.Count)
             {
                 addToWishlisttNumber = numberOfWishedProducts;
-
             }
             else
             {
@@ -97,7 +100,7 @@ namespace FelicityStore_IrinaOrban.POM
                 addToWishlistBtn.Submit();
             }
             
-            return driver.FindElement(By.Id(numberOfProductInWishlistSelector)).Text;
+            return int.Parse(MyUtils.WaitForElementClick(driver,5,By.Id(numberOfProductInWishlistSelector)).Text)-numberOfProductsExistingInWishlist;
 
         }
 

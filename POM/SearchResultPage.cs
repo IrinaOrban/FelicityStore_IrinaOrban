@@ -24,7 +24,7 @@ namespace FelicityStore_IrinaOrban.POM
         }
         public string CheckSearchPage()
         {
-            var authPageEl = driver.FindElement(By.Id(searchPageTextSelector));
+            var authPageEl = MyUtils.WaitForElementClick(driver,10,By.Id(searchPageTextSelector));
             return authPageEl.Text;
         }
         public void SubmitSearchText(string searchedText)
@@ -41,6 +41,8 @@ namespace FelicityStore_IrinaOrban.POM
         public bool HasSearchErrors()
         {
             var hasSearchErrros = false;
+            var authPageEl = MyUtils.WaitForElementClick(driver, 10, By.Id(searchPageTextSelector));
+
             var jsExecutor = (IJavaScriptExecutor)driver;
             bool hasFoundProducts = (Boolean)jsExecutor.ExecuteScript("return !!document.getElementsByClassName('prodListItem').length");
             bool hasFoundArticles = (Boolean)jsExecutor.ExecuteScript("return !!document.getElementsByClassName('ArticleBlogTabs').length");

@@ -47,7 +47,7 @@ namespace FelicityStore_IrinaOrban.Test.Authentication
                 yield return new TestCaseData(csvData.Rows[i].ItemArray);
             }
         }
-        [Test, Category("AuthTest"), Category("Negative"),Category("Functionality"), TestCaseSource("GetUserNegDataCsv"),Order(4)]
+        [Test, Category("AuthTest"), Category("Negative"),Category("Functionality"), TestCaseSource("GetModalNegUserDataCsv"),Order(4)]
         public void ModalUserLoginNegative(string username, string password)
         {
             String contextName = TestContext.CurrentContext.Test.Name;
